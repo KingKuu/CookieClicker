@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d360e5t8ltkm2"]
+[gd_scene load_steps=7 format=3 uid="uid://d360e5t8ltkm2"]
 
 [ext_resource type="Script" uid="uid://d216uixj4c88q" path="res://CookiesCounter.gd" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bfc3vr6kgt8r2" path="res://get_cookies.gd" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://dvpip6o73dap8" path="res://AutoClickerUpgrade.gd" id="3_fc0e3"]
+[ext_resource type="Script" uid="uid://bpafrqo060rl1" path="res://save.gd" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://b4ogohbg6ngls" path="res://ClickPowerUpgrade.gd" id="4_7jktm"]
+[ext_resource type="Script" uid="uid://ckn4l8j8rr5m7" path="res://load.gd" id="4_eow3j"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -44,6 +46,19 @@ script = ExtResource("2_e2o6t")
 [node name="Timer" type="Timer" parent="HBoxContainer/Main"]
 autostart = true
 
+[node name="VBoxContainer" type="HBoxContainer" parent="HBoxContainer/Main"]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="HBoxContainer/Main/VBoxContainer"]
+layout_mode = 2
+text = "Save"
+script = ExtResource("3_ryrav")
+
+[node name="Load" type="Button" parent="HBoxContainer/Main/VBoxContainer"]
+layout_mode = 2
+text = "Load"
+script = ExtResource("4_eow3j")
+
 [node name="Upgrades" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
@@ -73,5 +88,7 @@ script = ExtResource("4_7jktm")
 
 [connection signal="pressed" from="HBoxContainer/Main/GetCookies" to="HBoxContainer/Main/GetCookies" method="_on_pressed"]
 [connection signal="timeout" from="HBoxContainer/Main/Timer" to="HBoxContainer/Upgrades/AutoClicker/Upgrade" method="_on_timer_timeout"]
+[connection signal="pressed" from="HBoxContainer/Main/VBoxContainer/Save" to="HBoxContainer/Main/VBoxContainer/Save" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/Main/VBoxContainer/Load" to="HBoxContainer/Main/VBoxContainer/Load" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Upgrades/AutoClicker/Upgrade" to="HBoxContainer/Upgrades/AutoClicker/Upgrade" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/Upgrades/ClickPower/Upgrade" to="HBoxContainer/Upgrades/ClickPower/Upgrade" method="_on_pressed"]
